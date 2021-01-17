@@ -1,5 +1,8 @@
 package org.itstep.task01;
 
+import org.itstep.task01.exeption.EmptyListException;
+import org.itstep.task01.exeption.FullListException;
+
 public class List {
     private Object[] obj;
     private int size = -1;
@@ -15,11 +18,17 @@ public class List {
         return obj[idx];
     }
 
-    public void add(Object item) {
+    public void add(Object item)throws FullListException {
+        if (cur==size){
+            throw new FullListException("Попытка добавления в заполенный массив");
+        }
         obj[cur++] = item;
     }
 
-    public void removeLast() {
+    public void removeLast() throws EmptyListException {
+        if (cur<1){
+            throw new EmptyListException("Попытка удаления из пустого массива");
+        }
         obj[--cur] = null;
     }
 }
